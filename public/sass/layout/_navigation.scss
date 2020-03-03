@@ -1,0 +1,51 @@
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    
+    &__logo-box {
+        height: 15rem;
+        width: 15rem;
+        margin-left: 15rem;
+        margin-top: 1rem;
+        
+        @media only screen and (max-width: $bp-sm) {
+            margin-left: 0;
+        }
+    }
+    
+    &__logo {
+        width: 100%;
+    }
+    
+    &__list {
+        flex: 0 0 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        list-style: none;
+        margin-right: 15rem;
+        
+        @media only screen and (max-width: $bp-sm) {
+            flex: 0 0 80%;
+            margin-right: 0;
+        }
+    }
+    
+    &__item {
+        // nothing needed yet
+    }
+    
+    &__link {
+        text-decoration: none;
+        font-size: 2rem;
+        &:link,
+        &:visited {
+            color: $color-white;
+        }
+        
+        &:hover,
+        &:active {
+            color: $color-primary;
+        }
+    }
+}

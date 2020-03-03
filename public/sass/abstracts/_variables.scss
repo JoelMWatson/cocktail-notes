@@ -1,0 +1,44 @@
+// ------ COLORS ------
+
+// primary
+$color-primary: #6EAA52;
+$color-primary-light: #BBFF9C;
+$color-primary-dark: #2B6512;
+
+// secondary 
+$color-secondary: #033e6f;
+
+
+// light grey
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eeeeee;
+
+// dark grey
+$color-grey-dark-1: #333333;
+$color-grey-dark-2: #555555;
+$color-grey-dark-3: #777777;
+$color-grey-dark-4: #999999;
+
+
+// black & white
+$color-white: #ffffff;
+$color-black: #000000; 
+
+// ------ Shadows ------
+
+$box-shadow-small-high: 0 1rem 2rem rgba($color-black, .15);
+$box-shadow-small-low: 0 .5rem 1rem rgba($color-black, .2);
+
+// ------ BORDERS ------
+
+$border-radius-small: 3px;
+
+// ------ FONT ------
+
+$default-font-size: 1.6rem;
+
+$font-primary: 'Open Sans', sans-serif;
+
+// ------ BREAK POINTS ------
+$bp-lg: 80em; // 1280px
+$bp-sm: 56.25em; // 900px

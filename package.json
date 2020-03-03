@@ -1,0 +1,31 @@
+{
+  "name": "cocktail-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -r dotenv/config ./src/index.js -e js,ejs",
+    "watch:sass": "node-sass public/sass/main.scss public/css/style.css -w",
+    "compile:sass": "node-sass public/sass/main.scss public/css/style.comp.css",
+    "prefix:css": "postcss --use autoprefixer -b \"last 10 versions\" public/css/style.comp.css -o public/css/style.prefix.css",
+    "compress:css": "node-sass public/css/style.prefix.css public/css/style.min.css --output-style compressed",
+    "build:css": "npm-run-all compile:sass prefix:css compress:css",
+    "dev:sass": "npm-run-all -p dev watch:sass"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "dotenv": "^8.2.0",
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^7.1.0"
+  }
+}
