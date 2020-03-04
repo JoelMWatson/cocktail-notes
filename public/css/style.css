@@ -26,6 +26,9 @@ body {
   line-height: 1.7;
   color: #555555; }
 
+input {
+  font-family: "Open Sans", sans-serif; }
+
 .heading-primary {
   font-size: 4rem;
   color: #333333;
@@ -51,6 +54,65 @@ body {
   font-size: 1.6rem; }
   .paragraph:not(:last-child) {
     margin-bottom: 3rem; }
+
+.form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center; }
+  .form__field {
+    display: flex; }
+    .form__field:not(:last-child) {
+      margin-bottom: 3rem; }
+    .form__field--horizontal {
+      width: 50%; }
+  .form__label {
+    font-size: 2rem;
+    flex: 0 0 25%; }
+  .form__input {
+    font-size: 2rem;
+    flex: 0 1 75%; }
+
+.btn, .btn:link, .btn:visited {
+  margin-bottom: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 10rem;
+  transition: all .2s;
+  font-size: 1.6rem;
+  position: relative;
+  border: none;
+  margin: 1rem; }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); }
+  .btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; }
+
+.btn:active, .btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s; }
+
+.btn__empty {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff; }
 
 .navigation {
   visibility: hidden;
@@ -146,6 +208,17 @@ textarea {
   flex-grow: 1; }
 
 /* ----- index page ----- */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto; }
+  .main-content > img {
+    margin-top: -2rem; }
+
 /* ----- info pages ----- */
 .info {
   display: flex;

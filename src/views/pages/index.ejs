@@ -1,5 +1,17 @@
 <%- include('../partials/header.ejs') %>
 <main class="main">
-
+    <div class="main-content">
+        <h1 class="heading-primary"><%= title %></h1>
+        <img src="/img/cocktail-notes-logo.png" alt="Cocktail Notes Logo">
+        <form id="<%= page %>" class="form">
+            <% fields.forEach((field) => { %>
+                <div class="form__field">
+                    <label class="form__label"><%= field.label %></label>
+                    <input type="<%= field.type %>" name="<%= field.name %>" class="form__input" required>
+                </div>
+            <% })%>
+            <button type="submit" class="btn btn-submit">Submit</button>
+        </form>
+    </div>
 </main>
 <%- include('../partials/footer.ejs') %>

@@ -17,6 +17,19 @@ textarea {
 
 /* ----- index page ----- */
 
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+
+    & > img {
+        margin-top: -2rem;
+    }
+}
 
 
 /* ----- info pages ----- */
