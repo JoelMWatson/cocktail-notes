@@ -18,7 +18,7 @@
             password: e.target.elements.password.value,
         };
         $.ajax({
-            url: '/user/new',
+            url: '/user',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
@@ -42,7 +42,7 @@
             contentType: 'application/json',
             dataType: 'json'
         }).done((result) => {
-            console.log(result)
+            document.cookie = `CN_token=${result}`;
         })
     });
 

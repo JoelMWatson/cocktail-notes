@@ -1,6 +1,6 @@
 const { db, Sequelize} = require('../database/db');
-const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 module.exports = function(sequelize, DataTypes) {
     const User = sequelize.define('users', {
@@ -8,10 +8,8 @@ module.exports = function(sequelize, DataTypes) {
         email: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate(value) {
-                if (!validator.isEmail(value)) {
-                    throw new Error('Email invalid');
-                }
+            validate: {
+                isEmail: true
             }
         },
         username: {
@@ -21,20 +19,18 @@ module.exports = function(sequelize, DataTypes) {
         password: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate(value) {
-                if (value.toLowerCase().includes('password')) {
-                    throw new Error('password cannot contain the word "password"');
-                }
+            validate: {
+                not: ["password",'i'],
             }
+        },
+        tokens: {
+            type: Sequelize.STRING.BINARY,
+            defaultValue: 0
         }
-    }, {
-        instanceMethods: {
-            validPassword(password) {
-                return bcrypt.compare(password, this.password);
-            }
-        }
-    });
 
+    }, {/* options */});
+
+    // BeforeSave Hook
     // Hash the password before saving if password was changed
     User.beforeSave((user) => {
         if (user.changed('password')) {
@@ -48,6 +44,38 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
+    // Creates a auth token valid for 1 day
+    User.generateAuthToken = async (user) => {
+        const token = jwt.sign({id: user.id }, process.env.JWT_SECRET, {expiresIn: '1 day'});
+        user.tokens = token;
+        await user.save();
+        return token;
+    };
+
+    // Login function on User model
+    User.login = async (email, password) => {
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new Error('Unable to login');
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            throw new Error('Unable to login');
+        }
+        await User.generateAuthToken(user);
+        return user;
+    };
+
+    // Logout
+    User.logout = async (user) => {
+        user.tokens = "0";
+        await user.save();
+        return user;
+    };
+
+
+
     return User;
+
 };
 

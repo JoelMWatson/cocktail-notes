@@ -1,5 +1,5 @@
 const express = require('express');
-
+const auth = require('../database/auth');
 router = express.Router();
 
 router.get('/', (req, res) => {
@@ -67,6 +67,11 @@ router.get('/team', (req, res) => {
             Green River College, he took a job at a small development company working in PHP and JavaScript. Today,
             hiss sites are on CodeFellows where he plans to sharpen his skills and launch his career.`,
     });
+});
+
+router.get('/dashboard/:id', auth, (req, res) => {
+
+    res.send('sweeeeeet');
 });
 
 router.get('*', (req, res) => {
