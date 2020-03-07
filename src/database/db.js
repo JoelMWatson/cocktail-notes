@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 // Option 1: Passing parameters separately
 const db = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
-    host: 'localhost',
+    host: process.env.PGHOST,
     dialect: 'postgres'
 });
 
