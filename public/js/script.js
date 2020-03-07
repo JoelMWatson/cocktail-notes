@@ -121,6 +121,7 @@
                     </div>
                 </div>`
                 $('.notes__box').append(html);
+                $('#new-note').find('input, textarea').val('')
             },
             error: (xhr,status,error) => {
                 console.log(xhr, status, error);
