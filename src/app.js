@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 
 const userRouter = require('./routes/userRouter');
+const apiRouter = require('./routes/apiRouter');
 const viewRouter = require('./routes/viewRouter');
 
 // Start app
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Routers
 app.use(userRouter);
+app.use(apiRouter);
 app.use(viewRouter);
 
 module.exports = app;

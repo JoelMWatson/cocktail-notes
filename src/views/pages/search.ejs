@@ -4,10 +4,13 @@
         <h1 class="heading-primary"><%= title %></h1>
         <form id="search" class="search__form">
             <div class="form__field">
-                <input type="text" name="search" class="form__input" placeholder="margarita" required>
-                <button type="submit" class="btn btn-search">Search</button>
+                <input type="text" name="search" class="form__input" placeholder="margarita..." required>
+                <button type="submit" class="btn btn__search">Search</button>
             </div>
         </form>
+        <div class="search__list">
+            <!-- items go here -->
+        </div>
     </div>
 </main>
 <%- include('../partials/footer.ejs') %>
