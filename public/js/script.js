@@ -22,9 +22,12 @@
             method: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json'
-        }).done((result) => {
-            console.log(result)
+            success: (result,status,xhr) => {
+                window.location.replace(window.location.origin + "/dashboard");
+            },
+            error: (xhr,status,error) => {
+                console.log(xhr, status, error);
+            }
         })
     });
 
@@ -36,14 +39,20 @@
             password: e.target.elements.password.value,
         };
         $.ajax({
-            url: '/user/login',
+            url: '/login',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            dataType: 'json'
-        }).done((result) => {
-            document.cookie = `CN_token=${result}`;
+            success: (result,status,xhr) => {
+                window.location.replace(window.location.origin + "/dashboard");
+            },
+            error: (xhr,status,error) => {
+                console.log(xhr, status, error);
+            }
         })
     });
+
+    // Search Recipe
+
 
 })();

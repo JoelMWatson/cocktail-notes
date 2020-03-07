@@ -118,6 +118,7 @@ input {
   visibility: hidden;
   height: 0;
   width: 75%;
+  max-width: 45rem;
   position: absolute;
   top: 0;
   left: 0;

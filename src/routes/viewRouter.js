@@ -1,11 +1,17 @@
 const express = require('express');
-const auth = require('../database/auth');
+let sesh = require('./session');
 router = express.Router();
 
 router.get('/', (req, res) => {
+    sesh = req.session;
+    let loggedIn = false;
+    if (sesh.userId) {
+        return res.redirect('/dashboard');
+    }
     res.render('pages/index.ejs', {
         page: "login",
         title: "Cocktail Notes Login",
+        loggedIn: loggedIn,
         fields: [
             {
                 label: "Email",
@@ -22,9 +28,15 @@ router.get('/', (req, res) => {
 
 
 router.get('/register', (req, res) => {
+    sesh = req.session;
+    let loggedIn = false;
+    if (sesh.userId) {
+        return res.redirect('/dashboard');
+    }
     res.render('pages/index.ejs', {
         page: "register",
         title: "Cocktail Notes Create Account",
+        loggedIn: loggedIn,
         fields: [
             {
                 label: "Email",
@@ -44,9 +56,15 @@ router.get('/register', (req, res) => {
 });
 
 router.get('/about', (req, res) => {
+    sesh = req.session;
+    let loggedIn = false;
+    if (!sesh.userId) {
+        loggedIn = true;
+    }
     res.render('pages/info.ejs', {
         page: "about",
         title: "About Cocktail Notes",
+        loggedIn: loggedIn,
         img: 'cocktail-notes-logo.png',
         alt: 'Cocktail Notes Logo',
         text: `Cocktail Notes is a web application that helps you find the drinks you love. Search thousands of recipes 
@@ -58,20 +76,46 @@ router.get('/about', (req, res) => {
 });
 
 router.get('/team', (req, res) => {
+    sesh = req.session;
+    let loggedIn = false;
+    if (!sesh.userId) {
+        loggedIn = true;
+    }
     res.render('pages/info.ejs', {
         page: "team",
         title: "Meet the Team",
+        loggedIn: loggedIn,
         img: 'circle-crop-joel.png',
         alt: 'Joel Watson',
         text: `Joel is a junior software developer in the Seattle area. After graduating with his bachelors from
             Green River College, he took a job at a small development company working in PHP and JavaScript. Today,
-            hiss sites are on CodeFellows where he plans to sharpen his skills and launch his career.`,
+            hiss sites are on CodeFellows where he plans to sharpen his skills and launch his career.`
     });
 });
 
-router.get('/dashboard/:id', auth, (req, res) => {
+router.get('/dashboard', (req, res) => {
+    sesh = req.session;
+    if (!sesh.userId) {
+        return res.redirect('/');
+    }
+    res.render('pages/dashboard.ejs', {
+        page: "dashboard",
+        title: "Dashboard",
+        loggedIn: true
+    });
+});
 
-    res.send('sweeeeeet');
+router.get('/search', (req, res) => {
+    sesh = req.session;
+    if (!sesh.userId) {
+        return res.redirect('/');
+    }
+    res.render('pages/search.ejs', {
+        page: "search",
+        title: "Find Recipe",
+        loggedIn: true
+
+    });
 });
 
 router.get('*', (req, res) => {

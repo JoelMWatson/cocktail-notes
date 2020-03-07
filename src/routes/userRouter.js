@@ -1,42 +1,34 @@
 const express = require('express');
 const models = require('../models/index');
-const auth = require('../database/auth');
+let sesh = require('./session.js');
 
 router = express.Router();
 
-router.get('/user', auth, async (req, res) => {
-    try {
-        const user = await models.User.findOne({ where: { id: req.user.id }});
-        res.send(user);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-});
-
-
 // login
-router.post('/user/login', async (req, res) => {
+router.post('/login', async (req, res) => {
+    sesh = req.session;
     try {
         const user = await models.User.login(req.body.email, req.body.password);
-        res.send(user);
+        if (!user) {
+            return res.status(400).send('Invalid Login');
+        }
+        sesh.username = user.username;
+        sesh.userId = user.id;
+        res.send();
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send();
     }
 });
 
 // logout
-router.patch('/user/logout', auth, async (req, res) => {
-    try {
-        let user = await models.User.findOne({ where: { id: req.user.id }});
-        user = models.User.logout(user);
-        res.send(user);
-    } catch (error) {
-        res.status(500).send(error);
-    }
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 });
 
 // create
 router.post('/user', async (req, res) => {
+    sesh = req.session;
     try {
         const user = await models.User.create({
             email: req.body.email,
@@ -46,16 +38,16 @@ router.post('/user', async (req, res) => {
         if (!user) {
             return res.status(400).send();
         }
-        await models.User.generateAuthToken(user);
-        res.status(201).send(user);
+        sesh.username = user.username;
+        sesh.userId = user.id;
+        res.send();
     } catch (error) {
         res.status(500).send(error);
     }
-
 });
 
 // update
-router.patch('/user', auth, async (req, res) => {
+router.patch('/user', async (req, res) => {
     // TODO when adding update
 });
 
