@@ -59,7 +59,7 @@
             search: e.target.elements.search.value,
         };
         $.ajax({
-            url: '/api/s',
+            url: '/api',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
@@ -93,5 +93,4 @@
             }
         })
     });
-
 })();

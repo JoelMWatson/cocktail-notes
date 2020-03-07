@@ -5,7 +5,7 @@ let sesh = require('./session.js');
 router = express.Router();
 
 // search
-router.post('/api/s', async (req, res) => {
+router.post('/api', async (req, res) => {
     try {
         sesh = req.session;
         if (!sesh.userId) {

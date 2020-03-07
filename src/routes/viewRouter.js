@@ -58,7 +58,7 @@ router.get('/register', (req, res) => {
 router.get('/about', (req, res) => {
     sesh = req.session;
     let loggedIn = false;
-    if (!sesh.userId) {
+    if (sesh.userId) {
         loggedIn = true;
     }
     res.render('pages/info.ejs', {
@@ -78,7 +78,7 @@ router.get('/about', (req, res) => {
 router.get('/team', (req, res) => {
     sesh = req.session;
     let loggedIn = false;
-    if (!sesh.userId) {
+    if (sesh.userId) {
         loggedIn = true;
     }
     res.render('pages/info.ejs', {
