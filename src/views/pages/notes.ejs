@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+<main class="main">
+    <div class="notes">
+        <h1 class="heading-primary"><%= title %></h1>
+        <div class="notes__box">
+            <% notes.forEach((note) => { %>
+                <div class="note">
+                    <div class="note__side">
+                        <h3 class="note__name"><%= note.name %></h3>
+                        <p class="note__rating">
+                            <% for (let i=0; i < note.rating; i++) { %>
+                                <ion-icon name="star"></ion-icon>
+                            <% } %>
+                        </p>
+                        <p class="note__text"><%= note.description %></p>
+                    </div>
+                </div>
+            <% }) %>
+            <a href="#notes-modal" rel="modal:open" class="notes__modal">
+                <ion-icon name="add-circle" class="notes__icon"></ion-icon>
+            </a>
+        </div>
+        <div id="notes-modal"class="modal">
+            <h2 class="heading-secondary">New Tasting Note</h2>
+            <form id="new-note" class="notes__form">
+                <% fields.forEach((field) => { %>
+                    <div class="form__field">
+                        <label class="form__label"><%= field.label %></label>
+                        <input type="<%= field.type %>" name="<%= field.name %>" class="form__input" required>
+                    </div>
+                <% }) %>
+                    <div class="form__field">
+                        <label class="form__label">Rating</label>
+                        <input type="number" name="rating" class="form__input" min="1" max="10" required>
+                    </div>
+                <label class="form__label">Description</label>
+                <textarea name="description" class="form__input" rows="4" required></textarea>
+                <button type="submit" class="btn btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+<%- include('../partials/footer.ejs') %>

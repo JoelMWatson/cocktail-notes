@@ -3,7 +3,6 @@ const models = require('../models/index');
 
 let sesh = require('./session.js');
 
-
 router = express.Router();
 
 // login
@@ -28,6 +27,12 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+
+// // user settings page
+// router.get('/user', async (req, res) => {
+//     // TODO when adding settings page
+// });
+
 // create
 router.post('/user', async (req, res) => {
     sesh = req.session;
@@ -48,9 +53,9 @@ router.post('/user', async (req, res) => {
     }
 });
 
-// update
-router.patch('/user', async (req, res) => {
-    // TODO when adding update
-});
+// // update
+// router.patch('/user', async (req, res) => {
+//     // TODO when adding update ability
+// });
 
 module.exports = router;

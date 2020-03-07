@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 
 const userRouter = require('./routes/userRouter');
+const noteRouter = require('./routes/noteRouter');
 const apiRouter = require('./routes/apiRouter');
 const viewRouter = require('./routes/viewRouter');
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Routers
 app.use(userRouter);
+app.use(noteRouter);
 app.use(apiRouter);
 app.use(viewRouter);
 

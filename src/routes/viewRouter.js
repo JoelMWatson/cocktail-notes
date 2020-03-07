@@ -4,14 +4,13 @@ router = express.Router();
 
 router.get('/', (req, res) => {
     sesh = req.session;
-    let loggedIn = false;
     if (sesh.userId) {
-        return res.redirect('/dashboard');
+        return res.redirect('/notes');
     }
     res.render('pages/index.ejs', {
         page: "login",
         title: "Cocktail Notes Login",
-        loggedIn: loggedIn,
+        loggedIn: false,
         fields: [
             {
                 label: "Email",
@@ -29,14 +28,13 @@ router.get('/', (req, res) => {
 
 router.get('/register', (req, res) => {
     sesh = req.session;
-    let loggedIn = false;
     if (sesh.userId) {
-        return res.redirect('/dashboard');
+        return res.redirect('/notes');
     }
     res.render('pages/index.ejs', {
         page: "register",
         title: "Cocktail Notes Create Account",
-        loggedIn: loggedIn,
+        loggedIn: false,
         fields: [
             {
                 label: "Email",
@@ -89,19 +87,7 @@ router.get('/team', (req, res) => {
         alt: 'Joel Watson',
         text: `Joel is a junior software developer in the Seattle area. After graduating with his bachelors from
             Green River College, he took a job at a small development company working in PHP and JavaScript. Today,
-            hiss sites are on CodeFellows where he plans to sharpen his skills and launch his career.`
-    });
-});
-
-router.get('/dashboard', (req, res) => {
-    sesh = req.session;
-    if (!sesh.userId) {
-        return res.redirect('/');
-    }
-    res.render('pages/dashboard.ejs', {
-        page: "dashboard",
-        title: "Dashboard",
-        loggedIn: true
+            his sites are on CodeFellows where he plans to sharpen his skills and launch his career.`
     });
 });
 

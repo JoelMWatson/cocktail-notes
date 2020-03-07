@@ -101,78 +101,62 @@ textarea {
 
 /* ----- tasting notes page ----- */
 
-//.section-notes {
-//    background-color: $color-grey-light-1;
-//
-//    & h2 {
-//        text-align: center;
-//    }
-//
-//    & .notes {
-//        margin: 0 15rem;
-//
-//        &__box {
-//            display: grid;
-//            height: 32rem;
-//            grid-template-columns: repeat(3, 1fr);
-//            grid-row-gap: 5rem;
-//            justify-content: space-around;
-//            justify-items: center;
-//        }
-//    }
-//
-//    .note {
-//        text-align: center;
-//        background-color: $color-white;
-//        position: relative;
-//        cursor: pointer;
-//
-//        &__side {
-//            width: 25rem;
-//            height: 32rem;
-//            transition: all .8s ease;
-//            position: absolute;
-//            top: 0;
-//            left: -12rem;
-//            backface-visibility: hidden;
-//            border-radius: $border-radius-small;
-//            overflow: hidden;
-//            box-shadow: $box-shadow-small-high;
-//
-//            &--front {
-//
-//            }
-//
-//            &--back {
-//                transform: rotateY(180deg);
-//                width: 25rem;
-//                height: 100%;
-//            }
-//        }
-//
-//        &__name {
-//            font-size: 2rem;
-//        }
-//
-//        &__rating {
-//            font-size: $default-font-size;
-//            color: $color-primary;
-//        }
-//
-//        &__img {
-//            width: 25rem;
-//
-//        }
-//
-//        &__text {
-//            font-size: $default-font-size;
-//        }
-//    }
-//}
-//.note.turn .note__side--front {
-//    transform: rotateY(-180deg);
-//}
-//
-//.note.turn .note__side--back {
-//    transform: rotateY(0);
-//}
+.notes {
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__modal {
+        position: fixed;
+        bottom: 5rem;
+        right: 2.5rem;
+    }
+
+    &__icon {
+        width: 10rem;
+        height: 10rem;
+        color: $color-primary;
+    }
+}
+
+.note {
+    text-align: center;
+    background-color: $color-white;
+    margin-bottom: 2rem;
+
+    &__side {
+        width: 25rem;
+        height: 32rem;
+        border-radius: $border-radius-small;
+        overflow: hidden;
+        box-shadow: $box-shadow-small-high;
+    }
+
+    &__name {
+        font-size: 2rem;
+    }
+
+    &__rating {
+        font-size: $default-font-size;
+        color: $color-primary;
+    }
+
+    &__img {
+        width: 25rem;
+    }
+
+    &__text {
+        font-size: $default-font-size;
+    }
+}
+
+.note.turn .note__side--front {
+    transform: rotateY(-180deg);
+}
+
+.note.turn .note__side--back {
+    transform: rotateY(0);
+}

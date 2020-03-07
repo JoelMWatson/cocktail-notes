@@ -112,6 +112,9 @@ input {
   border-radius: 3px;
   margin: 0 0 0 1rem; }
 
+.btn-submit {
+  width: 100%; }
+
 .recipe__list {
   list-style: none;
   font-size: 2rem;
@@ -271,3 +274,43 @@ textarea {
   margin-right: 1rem; }
 
 /* ----- tasting notes page ----- */
+.notes__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.notes__modal {
+  position: fixed;
+  bottom: 5rem;
+  right: 2.5rem; }
+
+.notes__icon {
+  width: 10rem;
+  height: 10rem;
+  color: #6EAA52; }
+
+.note {
+  text-align: center;
+  background-color: #ffffff;
+  margin-bottom: 2rem; }
+  .note__side {
+    width: 25rem;
+    height: 32rem;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); }
+  .note__name {
+    font-size: 2rem; }
+  .note__rating {
+    font-size: 1.6rem;
+    color: #6EAA52; }
+  .note__img {
+    width: 25rem; }
+  .note__text {
+    font-size: 1.6rem; }
+
+.note.turn .note__side--front {
+  transform: rotateY(-180deg); }
+
+.note.turn .note__side--back {
+  transform: rotateY(0); }

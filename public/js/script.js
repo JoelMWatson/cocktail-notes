@@ -23,7 +23,7 @@
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: (result,status,xhr) => {
-                window.location.replace(window.location.origin + "/dashboard");
+                window.location.replace(window.location.origin + "/notes");
             },
             error: (xhr,status,error) => {
                 console.log(xhr, status, error);
@@ -44,7 +44,7 @@
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: (result,status,xhr) => {
-                window.location.replace(window.location.origin + "/dashboard");
+                window.location.replace(window.location.origin + "/notes");
             },
             error: (xhr,status,error) => {
                 console.log(xhr, status, error);
@@ -93,4 +93,48 @@
             }
         })
     });
+
+    // create new note
+    $('#new-note').on('submit', (e) => {
+        e.preventDefault();
+        const data = {
+            name: e.target.elements.name.value,
+            rating: e.target.elements.rating.value,
+            description: e.target.elements.description.value
+        };
+        $.ajax({
+            url: '/note',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: (note,status,xhr) => {
+                let html = `
+                <div class="note">
+                    <div class="note__side">
+                        <h3 class="note__name">${ note.name }</h3>
+                        <p class="note__rating">`;
+                for (let i=0; i < note.rating; i++) {
+                    html += `<ion-icon name="star"></ion-icon>`;
+                }
+                html +=`</p>
+                        <p class="note__text">${ note.description }</p>
+                    </div>
+                </div>`
+                $('.notes__box').append(html);
+            },
+            error: (xhr,status,error) => {
+                console.log(xhr, status, error);
+            }
+        })
+    });
+
+    // // turn over notes on click
+    // $.each($('.note'), (index, note) => {
+    //     note.addEventListener("click", (e) => {
+    //         e.preventDefault();
+    //         e.target.closest(".note").classList.toggle("turn");
+    //     });
+    // });
+
+
 })();
